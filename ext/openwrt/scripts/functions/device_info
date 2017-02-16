@@ -29,7 +29,7 @@ set_device_info_product_class() {
 }
 
 get_device_info_serial_number() {
-local val=`/sbin/uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} get freecwmp.@device[0].serial_number 2> /dev/null`
+local val=`cat /sys/class/net/eth1/address | sed 's/':'//g' | awk '{print toupper($0)}' 2> /dev/null`
 freecwmp_output "InternetGatewayDevice.DeviceInfo.SerialNumber" "$val"
 }
 
